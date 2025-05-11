@@ -1,7 +1,7 @@
 chat_id: -1002577993659
 bot_token: "7601672615:AAH7xdNDPXzxPX7nwB3ayLYh3sHA1r202bw"
 db:
-    host: localhost
+    host: postgres
     port: 5432
     user: postgres
     password: postgres
