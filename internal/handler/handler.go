@@ -6,6 +6,7 @@ import (
 )
 
 type Repository interface {
+	GetUserId(topicId int) int64
 	GetTopicId(userId int64) int
 	CreateTopic(userId int64, topicId int)
 }

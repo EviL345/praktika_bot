@@ -1,5 +1,5 @@
-chat_id: -1002577993659
-bot_token: "7601672615:AAH7xdNDPXzxPX7nwB3ayLYh3sHA1r202bw"
+chat_id: -1002501405868
+bot_token: "6163439832:AAEUBTIAVkd1S9bhtHzGaFw-VicQhqNaD3Y"
 db:
     host: postgres
     port: 5432

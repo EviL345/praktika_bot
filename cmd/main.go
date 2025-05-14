@@ -23,10 +23,22 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	paths := []string{
+		tele.OnText,
+		tele.OnPhoto,
+		tele.OnVideo,
+		tele.OnDocument,
+		tele.OnAudio,
+		tele.OnVoice,
+		tele.OnSticker,
+		tele.OnLocation,
+		tele.OnContact,
+		tele.OnPoll,
+	}
 	hndlr := handler.New(cfg, bot, db)
-
-	bot.Handle(tele.OnText, hndlr.TextHandler)
+	for _, p := range paths {
+		bot.Handle(p, hndlr.MsgHandler)
+	}
 
 	log.Println("Бот запущен...")
 	bot.Start()
