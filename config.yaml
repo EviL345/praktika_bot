@@ -1,8 +1,8 @@
-chat_id: -1002577993659
-bot_token: "7601672615:AAH7xdNDPXzxPX7nwB3ayLYh3sHA1r202bw"
+chat_id: -1002695666026
+bot_token: "7893415559:AAHP0JE24BsR3BpPp6PDPl91OiB78CK8EWk"
 db:
     host: postgres
     port: 5432
     user: postgres
     password: postgres
-    db_name: test_bot
+    db_name: bot

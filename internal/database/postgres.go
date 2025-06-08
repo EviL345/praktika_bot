@@ -43,6 +43,22 @@ func (d *Database) Close() {
 	}
 }
 
+func (d *Database) GetUserId(TopicId int) int64 {
+	log.SetPrefix("GetUserId")
+	query := "SELECT id FROM users WHERE topic_id = $1"
+	row := d.Db.QueryRow(query, TopicId)
+	var userId int64
+	if err := row.Scan(&userId); err != nil {
+		if err == sql.ErrNoRows {
+			return 0
+		}
+		log.Printf("failed to scan user ID: %v", err)
+		return 0
+	}
+
+	return userId
+}
+
 func (d *Database) GetTopicId(userId int64) int {
 	log.SetPrefix("GetTopicId")
 	query := "SELECT topic_id FROM users WHERE id = $1"
@@ -53,10 +69,8 @@ func (d *Database) GetTopicId(userId int64) int {
 			return 0
 		}
 		log.Printf("failed to scan topic ID: %v", err)
-
 		return 0
 	}
-
 	return topicId
 }
 
