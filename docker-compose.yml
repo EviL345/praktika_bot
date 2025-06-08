@@ -5,7 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: praktika_bot
+    image: press-bot:latest
+    container_name: press-bot-go
     restart: unless-stopped
     depends_on:
       - postgres
@@ -13,26 +14,26 @@ services:
       - ./config.yaml:/app/config.yaml
       - ./migrations:/app/migrations
     networks:
-      - bot_network
+      - backend-network
     environment:
       - TZ=Europe/Moscow
 
   postgres:
     image: postgres:15-alpine
-    container_name: praktika_postgres
+    container_name: press-bot-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-test_bot}
-      PGDATA: /data/postgres
+      POSTGRES_DB: ${POSTGRES_DB:-bot}
+      PGDATA: /var/lib/postgresql/data
     volumes:
-      - postgres_data:/data/postgres
+      - postgres-data:/var/lib/postgresql/data
       - ./migrations:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
     networks:
-      - bot_network
+      - backend-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -40,8 +41,8 @@ services:
       retries: 5
 
 networks:
-  bot_network:
+  backend-network:
     driver: bridge
 
 volumes:
-  postgres_data:
+  postgres-data:
